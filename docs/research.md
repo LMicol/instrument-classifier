@@ -55,3 +55,9 @@ Torch audio makes things much simpler, no need to generate images and convert it
 Tensors have different size like the images, will need to resize.
 
 </observations>
+
+<actions>
+
+- Developed `wav_to_tensor.py`
+
+</actions>
