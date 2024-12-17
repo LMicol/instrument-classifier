@@ -60,4 +60,26 @@ Tensors have different size like the images, will need to resize.
 
 - Developed `wav_to_tensor.py`
 
+- Converted all wav to tensors.pt
+
 </actions>
+
+<observations>
+
+- There is no validation split on the dataset
+
+- I can re-structure the dataset to use folder-based builder from hugging face
+
+</observations>
+
+<actions>
+
+- Created a new script to load train data and generate validation split, while also creating the folder-based distribution
+
+</actions>
+
+<observations>
+
+- Data looks good to train now
+
+</observations>
