@@ -118,7 +118,7 @@ Also, I can try later doing the scrolling window approach.
 
 <tought>
 
-While the first idea model trains, the validation accuracy appears to be around 60%, which is not good enough.
+While the first idea model trains, the validation accuracy appears to be around 50%, which is not good enough.
 My guesses are:
     - The way I've implemented the pre processing to pad/truncate the data is croping the audio before the most recognizable part of the instruments, or the pading is leaving the spectrogram "too empty" for a descent recognition.
     - The duration of the slice may be too big, the average duration is 18 seconds, but I should've consider that this would dramatically afect short audios that are being padded.
@@ -137,5 +137,27 @@ Model finished traning, evaluation can be seen at [ideas.md](ideas.md) first ide
 Next steps:
     - Adjust preprocessing to only 2 seconds of audio
     - Grab the 'most important' part of the audio, I'll check for the dB levels.
+
+</tought>
+
+<actions>
+
+- Implemented `src/second_model/train.ipynb`
+
+- This all crops are around the highest pitch of the audio, I've croped one second to each side, adjusting in case it overflows the vector.
+
+</actions>
+
+<observations>
+
+Model two finished traning, evaluation can be seen at [ideas.md](ideas.md) second idea results.
+
+</observations>
+
+<tought>
+
+Negligible margin of improvement, model did get 75% smaller tho, let's try to use a pre-trained as a base for the third idea.
+
+In the mean time I'll implement the API provisioning and hosting.
 
 </tought>
