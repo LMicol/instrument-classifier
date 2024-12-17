@@ -11,7 +11,7 @@ OUTPUT_DIR = "./data"  # New directory to hold train, val, and test
 
 # Create output directories
 for split in ["train", "validation", "test"]:
-    for class_name in ["Sound_Guiatr", "Sound_Drum", "Sound_Violin", "Sound_Piano"]:
+    for class_name in ["Sound_Guitar", "Sound_Drum", "Sound_Violin", "Sound_Piano"]:
         os.makedirs(os.path.join(OUTPUT_DIR, split, class_name), exist_ok=True)
 
 # Load train.csv and test.csv
