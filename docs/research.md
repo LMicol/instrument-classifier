@@ -161,3 +161,30 @@ Negligible margin of improvement, model did get 75% smaller tho, let's try to us
 In the mean time I'll implement the API provisioning and hosting.
 
 </tought>
+
+<actions>
+
+- Implemented `src/third_model/train.ipynb`
+
+- Used an EfficientNet as base model and modified the traning loop a bit
+
+</actions>
+
+<observations>
+
+Results got much better at validation up to 60%.
+
+But when testing got the same accuracy score as the second idea.
+
+Interestly, there is only one major class getting misslabeled, most of the violin sounds are getting piano labeled, for the other classes, things are much better.
+
+</observations>
+
+
+<tought>
+
+Two last thing I want test before deploying the api is testing ResNet and MFCCs.
+
+ResNet will be just a change on the thrird model architecture, while for the MFCCs I will need to rework the pipeline.
+
+</tought>

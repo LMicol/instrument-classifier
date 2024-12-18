@@ -39,11 +39,11 @@ Objective:
 
 Method:
     - Find the loudest sound on the audio and grab 1s to each direction.
-    - Use a pre-trained model as a base model.
+    - Use a pre-trained model as a base model (Efficient Net).
 
 Metrics:
     - Same metrics
 
 Results:
-    - TBD
+    - Final Acc = 53.75%
 </third>
