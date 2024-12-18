@@ -90,7 +90,7 @@ Data looks good to train now. Should save to hugging face hub too.
 
 - Uploaded to Hugging Face [datasets](https://huggingface.co/datasets/Micol/musical-instruments-sound-dataset)
 
-- Started implementing `src/first_model/train.ipynb`
+- Started implementing `src/1_model/train.ipynb`
 
 </actions>
 
@@ -112,7 +112,7 @@ Also, I can try later doing the scrolling window approach.
 
 - Re-uploaded the dataset
 
-- Finish implementing `src/first_model/train.ipynb`
+- Finish implementing `src/1_model/train.ipynb`
 
 </actions>
 
@@ -142,7 +142,7 @@ Next steps:
 
 <actions>
 
-- Implemented `src/second_model/train.ipynb`
+- Implemented `src/2_model/train.ipynb`
 
 - This all crops are around the highest pitch of the audio, I've croped one second to each side, adjusting in case it overflows the vector.
 
@@ -164,7 +164,7 @@ In the mean time I'll implement the API provisioning and hosting.
 
 <actions>
 
-- Implemented `src/third_model/train.ipynb`
+- Implemented `src/3_model/train.ipynb`
 
 - Used an EfficientNet as base model and modified the traning loop a bit
 
