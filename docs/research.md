@@ -188,3 +188,41 @@ Two last thing I want test before deploying the api is testing ResNet and MFCCs.
 ResNet will be just a change on the thrird model architecture, while for the MFCCs I will need to rework the pipeline.
 
 </tought>
+
+
+<actions>
+
+- Implemented `src/4_model/train.ipynb`
+
+- Used an ResNet152 as base model and increased the sampling rate
+
+</actions>
+
+<observations>
+
+Model is going crazy during training this time, accuracy went from 0.60 -> 0.26 -> 0.65 -> 0.30.
+
+This will take a bit longer too since resnet152 is a bigger model.
+
+</observations>
+
+<actions>
+
+- Implemented `src/5_model/train.ipynb`
+
+- Made a simple neural network like 2º model, used the latest training loop, and modified data processing to use MFCCs.
+
+</actions>
+
+<observations>
+
+Model 4 train ended, complete garbage.
+
+Everything is being classified as Violin sound.
+
+</observations>
+
+<tought>
+This is so bad, I'm not even saving the wheights to this repository
+</tought>
+
