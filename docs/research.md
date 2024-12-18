@@ -90,7 +90,7 @@ Data looks good to train now. Should save to hugging face hub too.
 
 - Uploaded to Hugging Face [datasets](https://huggingface.co/datasets/Micol/musical-instruments-sound-dataset)
 
-- Started implementing `src/1_model/train.ipynb`
+- Started implementing `src/models/1_model/train.ipynb`
 
 </actions>
 
@@ -112,7 +112,7 @@ Also, I can try later doing the scrolling window approach.
 
 - Re-uploaded the dataset
 
-- Finish implementing `src/1_model/train.ipynb`
+- Finish implementing `src/models/1_model/train.ipynb`
 
 </actions>
 
@@ -142,7 +142,7 @@ Next steps:
 
 <actions>
 
-- Implemented `src/2_model/train.ipynb`
+- Implemented `src/models/2_model/train.ipynb`
 
 - This all crops are around the highest pitch of the audio, I've croped one second to each side, adjusting in case it overflows the vector.
 
@@ -164,7 +164,7 @@ In the mean time I'll implement the API provisioning and hosting.
 
 <actions>
 
-- Implemented `src/3_model/train.ipynb`
+- Implemented `src/models/3_model/train.ipynb`
 
 - Used an EfficientNet as base model and modified the traning loop a bit
 
@@ -192,7 +192,7 @@ ResNet will be just a change on the thrird model architecture, while for the MFC
 
 <actions>
 
-- Implemented `src/4_model/train.ipynb`
+- Implemented `src/models/4_model/train.ipynb`
 
 - Used an ResNet152 as base model and increased the sampling rate
 
@@ -208,7 +208,7 @@ This will take a bit longer too since resnet152 is a bigger model.
 
 <actions>
 
-- Implemented `src/5_model/train.ipynb`
+- Implemented `src/models/5_model/train.ipynb`
 
 - Made a simple neural network like 2º model, used the latest training loop, and modified data processing to use MFCCs.
 
