@@ -226,3 +226,31 @@ Everything is being classified as Violin sound.
 This is so bad, I'm not even saving the wheights to this repository
 </tought>
 
+<observations>
+
+Model 5 train ended.
+
+Model converged around the 20º epoch.
+
+Solid increase in performance.
+
+5th model wheights less than 1MB.
+
+1º Hypotesis => Wrong. 
+
+2º Hypotesis => Wrong.
+
+Spectrograms and MFCCs took almost the same time to train.
+
+MFCCs did perform better and converged much faster.
+
+</observations>
+
+<tought>
+
+60% accuracy is acceptable.
+
+Time to deploy the fifth model.
+
+</tought>
+

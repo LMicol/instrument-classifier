@@ -71,3 +71,22 @@ Results:
 <img title="Confusion Matrix for fourth idea" src="../images/4_idea.png">
 
 </fourth>
+
+<fifth>
+Objective:
+    - Classify audio into [Guitar, Drum, Violin, Piano]
+
+Method:
+    - Find the loudest sound on the audio and grab 1s to each direction.
+    - Compute the MFCCs of the sound.
+    - Train on a basic CNN.
+
+Metrics:
+    - Same metrics
+
+Results:
+    - Final Acc = 61.25%
+
+<img title="Confusion Matrix for fourth idea" src="../images/5_idea.png">
+
+</fifth>
