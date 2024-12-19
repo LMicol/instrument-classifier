@@ -5,14 +5,12 @@ from torchaudio.transforms import Resample, MFCC
 from AudioClassifier import AudioClassifier, N_MFCC, TARGET_SR, CLASS_MAP, DURATION
 
 # Fast API things
-from fastapi import FastAPI, HTTPException, File, UploadFile
+from fastapi import FastAPI, HTTPException, File
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
-import shutil
 
 # Other imports
-from datetime import datetime
-import io
+from io import BytesIO
 
 
 # Model configuration
@@ -68,7 +66,7 @@ def preprocess_audio(data, target_sr=TARGET_SR):
 async def predict_instrument(file: bytes = File(...)):
     try:
         # Load bytes from the payload
-        data = torchaudio.load(io.BytesIO(file))
+        data = torchaudio.load(BytesIO(file))
         
         # Preprocess audio
         mfcc = preprocess_audio(data)
