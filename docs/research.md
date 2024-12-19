@@ -254,3 +254,74 @@ Time to deploy the fifth model.
 
 </tought>
 
+<actions>
+
+- Developed `src/server`
+
+- Developed `src/web`
+
+- Developed `docker-compose`
+
+</actions>
+
+<observations>
+
+Now we have a simple web page to test the model, you can load a file or, use the microfone you select to stream the audio and see the results of the deployed model.
+
+</observations>
+
+<tought>
+
+I've being playing around with the model on the web page, I'm not really liking the results.
+
+For piano/keyboard it performs really good.
+
+For my eletric guitar it performs descent but misslabel a couple of times, but when I'm using the acustic guitar is awful.
+
+Since all the framework is already done, I'll give it one more try to improve this model.
+
+</tought>
+
+<actions>
+
+- While searching the possibilities I've found [wav2vec2](https://huggingface.co/docs/transformers/model_doc/wav2vec2), seems promessing
+
+- Adapting train notebook to use wav2vec2
+
+- Trained for a couple of epochs performed super bad, scraping idea.
+
+</actions>
+
+<tought>
+
+Okay, I've played a bit more with the spectrograms, maybe cuting the audio was a bad idea.
+
+I'll try to extract the whole data from the audio, not just a cut as it is right now and resize the Mel Spectrograms it self.
+
+And use that back again into the CNN as an image, just resizing the input image when necessary.
+
+</tought>
+
+<actions>
+
+- Developed `src/models/6_model/train.ipynb`
+
+</actions>
+
+<observations>
+
+Really good accuracy when training, over 80%. On test set performed <50% lol
+
+Tried a couple of different thing this time too, like reducing batch size and adding MaxPool layers.
+
+Also, increased some of the MEL parameters.
+
+Overall, the models seems to plateu close to the same mark, for sure there is a way to pre-process the audios that would make the final accuracy much better. 
+
+</observations>
+
+<tought>
+
+Well, for now that's it, maybe I come back at this problem again other day =)
+
+</tought>

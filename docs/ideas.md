@@ -90,3 +90,22 @@ Results:
 <img title="Confusion Matrix for fourth idea" src="../images/5_idea.png">
 
 </fifth>
+
+<sixth>
+Objective:
+    - Classify audio into [Guitar, Drum, Violin, Piano]
+
+Method:
+    - Use the whole audio.
+    - Compute the Spectrogram of the sound, and resize image if necessary.
+    - Train on a CNN.
+
+Metrics:
+    - Same metrics
+
+Results:
+    - Final Acc = 47.50%
+
+<img title="Confusion Matrix for fourth idea" src="../images/6_idea.png">
+
+</sixth>
