@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+}
+#status {
+    margin-top: 20px;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.square {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+}
+.square.shine {
+    box-shadow: 0 0 20px 5px red;
+    border-color: red;
+}
+.actions {
+    margin-top: 20px;
+}
+.actions button, .actions input[type="file"] {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.shine {
+    animation: shine-animation 1.5s infinite;
+}
+
+@keyframes shine-animation {
+    0% {
+        box-shadow: 0 0 10px red;
+    }
+    50% {
+        box-shadow: 0 0 20px red;
+    }
+    100% {
+        box-shadow: 0 0 10px red;
+    }
+}
