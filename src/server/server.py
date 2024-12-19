@@ -34,6 +34,10 @@ app.add_middleware(
 def preprocess_audio(data, target_sr=TARGET_SR):
     waveform, sr = data
 
+    # If the sound is low, just returns 'mute'
+    if float(waveform.max()) < 0.3 or float(waveform.min()) > -0.3:
+        return None
+
     # Resample if necessary
     if sr != target_sr:
         resample = Resample(orig_freq=sr, new_freq=target_sr)
@@ -71,13 +75,18 @@ async def predict_instrument(file: bytes = File(...)):
         # Preprocess audio
         mfcc = preprocess_audio(data)
         
-        # Predict
-        with torch.no_grad():
-            output = model(mfcc)
-            _, predicted_class = torch.max(output, 1)
-        # map to class
-        class_name = CLASS_MAP[predicted_class.tolist()[0]]
-        return {"predicted_class": class_name}
+        if mfcc != None:
+            # Predict
+            with torch.no_grad():
+                output = model(mfcc)
+                info, predicted_class = torch.max(output, 1)
+            # map to class
+            print(output)
+            print(info, predicted_class)
+            class_name = CLASS_MAP[predicted_class.tolist()[0]]
+            return {"predicted_class": class_name}
+        else:
+            return {"predicted_class": "mute"}
     except Exception as e:
         return HTTPException(status_code=500, detail=str(e))
 
