@@ -29,7 +29,7 @@ This project aims to classify sounds of musical instruments such as guitar, pian
 - **Multiple Models:** Six different models, each with unique approaches, are trained and evaluated.
 - **Visualization:** Confusion matrices and model performance metrics are documented.
 - **Deployment:** Dockerized server and web interface for easy deployment.
-- **Research-Driven Development:** Insights and research guiding the development process are documented.
+- **Research-Driven Development:** Insights and research guiding the development process are documented inside [this file](docs/research.md) and [this one](docs/ideas.md).
 
 ---
 
