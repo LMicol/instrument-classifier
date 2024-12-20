@@ -1,111 +1,116 @@
-<first>
-Objective:
-    - Classify audio into [Guitar, Drum, Violin, Piano]
+# First Idea
 
-Method:
-    - Create spectogram images from audio files
-    - Define simple CNN as baseline
-    - Train and evaluate
+## Objective:
+- Classify audio into [Guitar, Drum, Violin, Piano]
 
-Metrics:
-    - Cross-Entropy
-    - Accuracy
-    - Confusion matrix
+## Method:
+- Create spectrogram images from audio files  
+- Define simple CNN as baseline  
+- Train and evaluate
 
-Results:
-    - Final Acc = 52.5%
+## Metrics:
+- Cross-Entropy  
+- Accuracy  
+- Confusion matrix
+
+## Results:
+- Final Acc = 52.5%
 
 <img title="Confusion Matrix for first idea" src="../images/1_idea.png">
 
-</first>
+---
 
-<second>
-Objective:
-    - Classify audio into [Guitar, Drum, Violin, Piano]
+# Second Idea
 
-Method:
-    - Find the loudest sound on the audio and grab 1s to each direction.
+## Objective:
+- Classify audio into [Guitar, Drum, Violin, Piano]
 
-Metrics:
-    - Same metrics
+## Method:
+- Find the loudest sound on the audio and grab 1 second in each direction.
 
-Results:
-    - Final Acc = 53.75%
+## Metrics:
+- Same metrics
+
+## Results:
+- Final Acc = 53.75%
 
 <img title="Confusion Matrix for second idea" src="../images/2_idea.png">
-</second>
 
-<third>
-Objective:
-    - Classify audio into [Guitar, Drum, Violin, Piano]
+---
 
-Method:
-    - Find the loudest sound on the audio and grab 1s to each direction.
-    - Use a pre-trained model as a base model (Efficient Net).
+# Third Idea
 
-Metrics:
-    - Same metrics
+## Objective:
+- Classify audio into [Guitar, Drum, Violin, Piano]
 
-Results:
-    - Final Acc = 53.75%
+## Method:
+- Find the loudest sound on the audio and grab 1 second in each direction.  
+- Use a pre-trained model as a base model (EfficientNet).
+
+## Metrics:
+- Same metrics
+
+## Results:
+- Final Acc = 53.75%
 
 <img title="Confusion Matrix for third idea" src="../images/3_idea.png">
 
-</third>
+---
 
-<fourth>
-Objective:
-    - Classify audio into [Guitar, Drum, Violin, Piano]
+# Fourth Idea
 
-Method:
-    - Find the loudest sound on the audio and grab 1s to each direction.
-    - Use a pre-trained model as a base model (ResNet).
-    - Increase Sample Rate
+## Objective:
+- Classify audio into [Guitar, Drum, Violin, Piano]
 
-Metrics:
-    - Same metrics
+## Method:
+- Find the loudest sound on the audio and grab 1 second in each direction.  
+- Use a pre-trained model as a base model (ResNet).  
+- Increase Sample Rate
 
-Results:
-    - Final Acc = 17.50%
+## Metrics:
+- Same metrics
+
+## Results:
+- Final Acc = 17.50%
 
 <img title="Confusion Matrix for fourth idea" src="../images/4_idea.png">
 
-</fourth>
+---
 
-<fifth>
-Objective:
-    - Classify audio into [Guitar, Drum, Violin, Piano]
+# Fifth Idea
 
-Method:
-    - Find the loudest sound on the audio and grab 1s to each direction.
-    - Compute the MFCCs of the sound.
-    - Train on a basic CNN.
+## Objective:
+- Classify audio into [Guitar, Drum, Violin, Piano]
 
-Metrics:
-    - Same metrics
+## Method:
+- Find the loudest sound on the audio and grab 1 second in each direction.  
+- Compute the MFCCs of the sound.  
+- Train on a basic CNN.
 
-Results:
-    - Final Acc = 61.25%
+## Metrics:
+- Same metrics
 
-<img title="Confusion Matrix for fourth idea" src="../images/5_idea.png">
+## Results:
+- Final Acc = 61.25%
 
-</fifth>
+<img title="Confusion Matrix for fifth idea" src="../images/5_idea.png">
 
-<sixth>
-Objective:
-    - Classify audio into [Guitar, Drum, Violin, Piano]
+---
 
-Method:
-    - Use the whole audio.
-    - Compute the Spectrogram of the sound, and resize image if necessary.
-    - Train on a CNN.
+# Sixth Idea
 
-Metrics:
-    - Same metrics
+## Objective:
+- Classify audio into [Guitar, Drum, Violin, Piano]
 
-Results:
-    - Final Acc = 47.50%
+## Method:
+- Use the whole audio.  
+- Compute the Spectrogram of the sound, and resize image if necessary.  
+- Train on a CNN.
 
-<img title="Confusion Matrix for fourth idea" src="../images/6_idea.png">
+## Metrics:
+- Same metrics
 
-</sixth>
+## Results:
+- Final Acc = 47.50%
+
+<img title="Confusion Matrix for sixth idea" src="../images/6_idea.png">

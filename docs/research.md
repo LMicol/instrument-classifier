@@ -1,327 +1,299 @@
-This file documents how I searched, my thought process and, how I found the tools to implement the solution
+# Research Documentation
 
-<tought>Let's start by searching something</tought>
+This file documents how I searched, my thought process and, the tools I've used to implement the solution.
 
-<actions>
+### Personal Thoughts
 
-- We start with a Google search: `Audio classification`
+Let's start by searching something.
 
-- Found Google for Developers page
+---
 
+###  Actions
+
+- We start with a Google search: Audio classification  
+- Found Google for Developers page  
 - Looking into [Get started with audio classification](https://developers.google.com/learn/pathways/get-started-audio-classification)
 
-</actions>
+---
 
-<tought>WHAT? So we use computer vision???</tought>
+### Personal Thoughts
 
-<observations>
+WHAT? So we use computer vision???
 
-- Can use pre-trained model
+---
 
+### Research Oobservations
+
+- Can use pre-trained model  
 - Or train from scratch
 
-</observations>
+---
 
-<tought>Look into 1st idea</tought>
+### Personal Thoughts
 
-<observations>
+Look into 1st idea
 
-- We can convert the audio into:
-    - Mel Spectrograms
-    - MFCCs (Mel-Frequency Cepstral Coefficients)
+---
 
-Spectograms are 2D arrays and MFCCs are 1D arrays.
-1º Hypothesis: Spectograms will have more information about the data and will take longer to train and predict.
-2º Hypothesis: MFCCs compress information into the 1D resulting a loss of detail but decrease the time to compute and can perform good enought when compared to the spectrograms. 
+### Research Oobservations
 
-</observations>
+- We can convert the audio into:  
+  - Mel Spectrograms  
+  - MFCCs (Mel-Frequency Cepstral Coefficients)
 
-<actions>
+Spectrograms are 2D arrays and MFCCs are 1D arrays.  
+1º Hypothesis: Spectrograms will have more information about the data and will take longer to train and predict.  
+2º Hypothesis: MFCCs compress information into 1D, resulting in a loss of detail but decreasing the time to compute and potentially performing well enough compared to spectrograms.
 
-- Developed `tests/spectrograms.ipynb`
+---
 
-- Searched more about the topic
+###  Actions
 
-- Found that can use torch audio to do the processing
+- Developed tests/spectrograms.ipynb  
+- Searched more about the topic  
+- Found that we can use torch audio to do the processing  
+- Developed tests/torchaudio.ipynb
 
-- Developed `tests/torchaudio.ipynb`
+---
 
-</actions>
+### Research Oobservations
 
-<observations>
+Torch audio simplifies the process, eliminating the need to generate images and convert them back to tensors, thereby preventing data loss.  
+Tensors have different sizes similar to images; will need to resize them.
 
-Torch audio makes things much simpler, no need to generate images and convert it back to tensors, skiped one processed and prevented data loss.
+---
 
-Tensors have different size like the images, will need to resize.
+###  Actions
 
-</observations>
-
-<actions>
-
-- Developed `src/wav_to_tensor.py`
-
+- Developed src/wav_to_tensor.py  
 - Converted all wav to tensors.pt
 
-</actions>
+---
 
-<observations>
+### Research Oobservations
 
-- There is no validation split on the dataset
+- There is no validation split in the dataset  
+- I can re-structure the dataset to use a folder-based builder from Hugging Face
 
-- I can re-structure the dataset to use folder-based builder from hugging face
+---
 
-</observations>
-
-<actions>
+###  Actions
 
 - Created a new script to load train data and generate validation split, while also creating the folder-based distribution
 
-</actions>
+---
 
-<observations>
+### Research Oobservations
 
-Data looks good to train now. Should save to hugging face hub too.
+Data looks good for training now. Should save to Hugging Face hub too.
 
-</observations>
+---
 
-<actions>
+###  Actions
 
-- Created simple load script `src/upload_to_huggingface.ipynb` using folder builder
+- Created a simple load script src/upload_to_huggingface.ipynb using folder builder  
+- Uploaded to Hugging Face [datasets](https://huggingface.co/datasets/Micol/musical-instruments-sound-dataset)  
+- Started implementing src/models/1_model/train.ipynb
 
-- Uploaded to Hugging Face [datasets](https://huggingface.co/datasets/Micol/musical-instruments-sound-dataset)
+---
 
-- Started implementing `src/models/1_model/train.ipynb`
+### Research Oobservations
 
-</actions>
+During this implementation, I found that one audio file was corrupted; had to fix that before continuing.
 
-<observations>
+---
 
-During this implementation I found that one audio file was corrupted, had to fix that before continuing.
+### Personal Thoughts
 
-</observations>
-
-<tought>
-
-Since I'll be using a MEL spectrogram and the audio can have different lengths, maybe I can convert the audio sample rate and other parameters to make it always the same size for the model.
-
+Since I'll be using a MEL spectrogram and the audio can have different lengths, maybe I can convert the audio sample rate and other parameters to make it always the same size for the model.  
 Also, I can try later doing the scrolling window approach.
 
-</tought>
+---
 
-<actions>
+###  Actions
 
-- Re-uploaded the dataset
+- Re-uploaded the dataset  
+- Finished implementing src/models/1_model/train.ipynb
 
-- Finish implementing `src/models/1_model/train.ipynb`
+---
 
-</actions>
+### Personal Thoughts
 
-<tought>
+While the first idea model trains, the validation accuracy appears to be around 50%, which is not good enough.  
+My guesses are:  
+  - The way I've implemented the preprocessing to pad/truncate the data is cropping the audio before the most recognizable part of the instruments, or the padding is leaving the spectrogram "too empty" for decent recognition.  
+  - The duration of the slice may be too big; the average duration is 18 seconds, but I should've considered that this would dramatically affect short audios that are being padded.  
+  - Or, maybe the neural network I've developed is too "simple", should try pre-trained models to see how that affects the results.
 
-While the first idea model trains, the validation accuracy appears to be around 50%, which is not good enough.
-My guesses are:
-    - The way I've implemented the pre processing to pad/truncate the data is croping the audio before the most recognizable part of the instruments, or the pading is leaving the spectrogram "too empty" for a descent recognition.
-    - The duration of the slice may be too big, the average duration is 18 seconds, but I should've consider that this would dramatically afect short audios that are being padded.
-    - Or, maybe the neural network I've developed is too "simple", should try pre-trained models to see how that afect the results.
+---
 
-</tought>
+### Research Oobservations
 
-<observations>
+Model finished training, evaluation can be seen at [ideas.md](ideas.md) for first idea results.
 
-Model finished traning, evaluation can be seen at [ideas.md](ideas.md) first idea results.
+---
 
-</observations>
+### Personal Thoughts
 
-<tought>
+Next steps:  
+  - Adjust preprocessing to only 2 seconds of audio  
+  - Grab the 'most important' part of the audio, I'll check for the dB levels.
 
-Next steps:
-    - Adjust preprocessing to only 2 seconds of audio
-    - Grab the 'most important' part of the audio, I'll check for the dB levels.
+---
 
-</tought>
+###  Actions
 
-<actions>
+- Implemented src/models/2_model/train.ipynb  
+- This crop is around the highest pitch of the audio; I've cropped one second from each side, adjusting in case it overflows the vector.
 
-- Implemented `src/models/2_model/train.ipynb`
+---
 
-- This all crops are around the highest pitch of the audio, I've croped one second to each side, adjusting in case it overflows the vector.
+### Research Oobservations
 
-</actions>
+Model two finished training, evaluation can be seen at [ideas.md](ideas.md) for second idea results.
 
-<observations>
+---
 
-Model two finished traning, evaluation can be seen at [ideas.md](ideas.md) second idea results.
+### Personal Thoughts
 
-</observations>
+Negligible margin of improvement, model did get 75% smaller though; let's try to use a pre-trained model as a base for the third idea.  
+In the meantime, I'll implement the API provisioning and hosting.
 
-<tought>
+---
 
-Negligible margin of improvement, model did get 75% smaller tho, let's try to use a pre-trained as a base for the third idea.
+###  Actions
 
-In the mean time I'll implement the API provisioning and hosting.
+- Implemented src/models/3_model/train.ipynb  
+- Used an EfficientNet as a base model and modified the training loop a bit.
 
-</tought>
+---
 
-<actions>
+### Research Oobservations
 
-- Implemented `src/models/3_model/train.ipynb`
+Results got much better at validation, up to 60%.  
+But when testing, got the same accuracy score as the second idea.  
+Interestingly, there is only one major class getting mislabeled; most violin sounds are being labeled as piano. For the other classes, things are much better.
 
-- Used an EfficientNet as base model and modified the traning loop a bit
+---
 
-</actions>
+### Personal Thoughts
 
-<observations>
+Two last things I want to test before deploying the API are testing ResNet and MFCCs.  
+ResNet will be just a change on the third model architecture, while for the MFCCs I will need to rework the pipeline.
 
-Results got much better at validation up to 60%.
+---
 
-But when testing got the same accuracy score as the second idea.
+###  Actions
 
-Interestly, there is only one major class getting misslabeled, most of the violin sounds are getting piano labeled, for the other classes, things are much better.
+- Implemented src/models/4_model/train.ipynb  
+- Used a ResNet152 as a base model and increased the sampling rate.
 
-</observations>
+---
 
+### Research Oobservations
 
-<tought>
+Model is going crazy during training this time, accuracy went from 0.60 -> 0.26 -> 0.65 -> 0.30.  
+This will take a bit longer too since ResNet152 is a bigger model.
 
-Two last thing I want test before deploying the api is testing ResNet and MFCCs.
+---
 
-ResNet will be just a change on the thrird model architecture, while for the MFCCs I will need to rework the pipeline.
+###  Actions
 
-</tought>
+- Implemented src/models/5_model/train.ipynb  
+- Made a simple neural network like the 2nd model, used the latest training loop, and modified data processing to use MFCCs.
 
+---
 
-<actions>
+### Research Oobservations
 
-- Implemented `src/models/4_model/train.ipynb`
-
-- Used an ResNet152 as base model and increased the sampling rate
-
-</actions>
-
-<observations>
-
-Model is going crazy during training this time, accuracy went from 0.60 -> 0.26 -> 0.65 -> 0.30.
-
-This will take a bit longer too since resnet152 is a bigger model.
-
-</observations>
-
-<actions>
-
-- Implemented `src/models/5_model/train.ipynb`
-
-- Made a simple neural network like 2º model, used the latest training loop, and modified data processing to use MFCCs.
-
-</actions>
-
-<observations>
-
-Model 4 train ended, complete garbage.
-
+Model 4 train ended, complete garbage.  
 Everything is being classified as Violin sound.
 
-</observations>
+---
 
-<tought>
-This is so bad, I'm not even saving the wheights to this repository
-</tought>
+### Personal Thoughts
 
-<observations>
+This is so bad, I'm not even saving the weights to this repository.
 
-Model 5 train ended.
+---
 
-Model converged around the 20º epoch.
+### Research Oobservations
 
-Solid increase in performance.
+Model 5 train ended.  
+Model converged around the 20th epoch.  
+Solid increase in performance.  
+5th model weights less than 1MB.  
 
-5th model wheights less than 1MB.
-
-1º Hypotesis => Wrong. 
-
-2º Hypotesis => Wrong.
-
-Spectrograms and MFCCs took almost the same time to train.
-
+1st Hypothesis => Wrong.  
+2nd Hypothesis => Wrong.  
+Spectrograms and MFCCs took almost the same time to train.  
 MFCCs did perform better and converged much faster.
 
-</observations>
+---
 
-<tought>
+### Personal Thoughts
 
-60% accuracy is acceptable.
-
+60% accuracy is acceptable.  
 Time to deploy the fifth model.
 
-</tought>
+---
 
-<actions>
+###  Actions
 
-- Developed `src/server`
+- Developed src/server  
+- Developed src/web  
+- Developed docker-compose
 
-- Developed `src/web`
+---
 
-- Developed `docker-compose`
+### Research Oobservations
 
-</actions>
+Now we have a simple web page to test the model, you can load a file or use the microphone you select to stream the audio and see the results of the deployed model.
 
-<observations>
+---
 
-Now we have a simple web page to test the model, you can load a file or, use the microfone you select to stream the audio and see the results of the deployed model.
+### Personal Thoughts
 
-</observations>
-
-<tought>
-
-I've being playing around with the model on the web page, I'm not really liking the results.
-
-For piano/keyboard it performs really good.
-
-For my eletric guitar it performs descent but misslabel a couple of times, but when I'm using the acustic guitar is awful.
+I've been playing around with the model on the web page; I'm not really liking the results.  
+For piano/keyboard, it performs really well.  
+For my electric guitar, it performs decently but mislabels a couple of times. When I'm using the acoustic guitar, it's awful.
 
 Since all the framework is already done, I'll give it one more try to improve this model.
 
-</tought>
+---
 
-<actions>
+###  Actions
 
-- While searching the possibilities I've found [wav2vec2](https://huggingface.co/docs/transformers/model_doc/wav2vec2), seems promessing
+- While searching for possibilities, I've found [wav2vec2](https://huggingface.co/docs/transformers/model_doc/wav2vec2), seems promising.  
+- Adapting train notebook to use wav2vec2.  
+- Trained for a couple of epochs, performed super bad, scraping idea.
 
-- Adapting train notebook to use wav2vec2
+---
 
-- Trained for a couple of epochs performed super bad, scraping idea.
+### Personal Thoughts
 
-</actions>
-
-<tought>
-
-Okay, I've played a bit more with the spectrograms, maybe cuting the audio was a bad idea.
-
-I'll try to extract the whole data from the audio, not just a cut as it is right now and resize the Mel Spectrograms it self.
-
+Okay, I've played a bit more with the spectrograms, maybe cutting the audio was a bad idea.  
+I'll try to extract the whole data from the audio, not just a cut as it is right now, and resize the Mel Spectrograms itself.  
 And use that back again into the CNN as an image, just resizing the input image when necessary.
 
-</tought>
+---
 
-<actions>
+###  Actions
 
-- Developed `src/models/6_model/train.ipynb`
+- Developed src/models/6_model/train.ipynb
 
-</actions>
+---
 
-<observations>
+### Research Oobservations
 
-Really good accuracy when training, over 80%. On test set performed <50% lol
+Really good accuracy when training, over 80%. On the test set performed <50% lol.  
+Tried a couple of different things this time too, like reducing batch size and adding MaxPool layers.  
+Also, increased some of the MEL parameters.  
 
-Tried a couple of different thing this time too, like reducing batch size and adding MaxPool layers.
+Overall, the models seem to plateau close to the same mark, for sure there is a way to preprocess the audios that would make the final accuracy much better.
 
-Also, increased some of the MEL parameters.
+---
 
-Overall, the models seems to plateu close to the same mark, for sure there is a way to pre-process the audios that would make the final accuracy much better. 
+### Personal Thoughts
 
-</observations>
-
-<tought>
-
-Well, for now that's it, maybe I come back at this problem again other day =)
-
-</tought>
+Well, for now, that's it, maybe I come back to this problem another day =)
