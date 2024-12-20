@@ -37,11 +37,12 @@ This project aims to classify sounds of musical instruments such as guitar, pian
 
 ### Prerequisites
 1. **Python Environment:** Install Python 3.11+.
-2. **Dependencies:** Install dependencies with:
+2. **Pytroch:** Install [Pytorch](https://pytorch.org/get-started/locally/).
+3. **Dependencies:** Install dependencies with:
    ```bash
    pip install -r requirements.txt
    ```
-3. **Docker:** Ensure Docker is installed for deployment.
+4. **Docker(Optional, but recommend):** Ensure Docker is installed for deployment.
 
 ### Installation
 1. Clone this repository:
@@ -58,15 +59,16 @@ This project aims to classify sounds of musical instruments such as guitar, pian
 
 ## Usage
 
-### Audio Dataset
+### Instruments sounds Dataset
 The dataset used in this project can be found at [Micol/musical-instruments-sound-dataset](https://huggingface.co/datasets/Micol/musical-instruments-sound-dataset).
 
 I've used this [Kaggle dataset](https://www.kaggle.com/datasets/soumendraprasad/musical-instruments-sound-dataset/) as base and made some changes using the scripts in `src/helpers`.
 
-_Note: The helper scripts were only used during development._
-
 ### Training Models
 Explore the `src/models` directory for Jupyter Notebooks to train and evaluate models. Each model has its corresponding training script and saved weights.
+To train a model in your machine or play with the notebooks, you will need to setup the whole environment.
+
+**I recommend using docker and the web view if you just want to test the final model.**
 
 ### Web view
 In the folder `src/web` you'll find a simple web interface to test the model API with your microfone, I recommend using Firefox to test it.
@@ -95,6 +97,10 @@ Access the web interface at `http://localhost:5000`.
 
 ### Research
 The `docs/research.md` file contains detailed information about the research conducted to guide model development.
+The file is structured in three categories:
+- Personal Thoughts: Personal monologues and internal discussion I've had
+- Actions: Things I've done.
+- Research Oobservations: Comments about code, model behavior and, research overall. 
 
 ### Ideas
 The `docs/ideas.md` file includes:
