@@ -81,8 +81,6 @@ async def predict_instrument(file: bytes = File(...)):
                 output = model(mfcc)
                 info, predicted_class = torch.max(output, 1)
             # map to class
-            print(output)
-            print(info, predicted_class)
             class_name = CLASS_MAP[predicted_class.tolist()[0]]
             return {"predicted_class": class_name}
         else:
